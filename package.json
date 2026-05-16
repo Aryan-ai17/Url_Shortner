@@ -2,7 +2,7 @@
   "name": "url_shortner",
   "version": "1.0.0",
   "description": "A  URL_Shortner backend Project using express.js ",
-  "type":"module",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",

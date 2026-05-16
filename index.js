@@ -1,6 +1,13 @@
 import express from "express"
 import urlRouters from "./src/routers/urlRouters.js"
 import reDirectRouter from "./src/routers/reDirectRouter.js"
+import connectDB from "./src/config/db.js"
+import dotenv from "dotenv"
+
+dotenv.config()
+console.log(process.env.MONGO_URI)
+
+connectDB()
 const app=express()
 
 const port = 3000
