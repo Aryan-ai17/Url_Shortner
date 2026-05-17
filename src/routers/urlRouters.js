@@ -1,8 +1,8 @@
 import express from "express"
 const router =express.Router()
-router.post("/shorten",(req,res)=>{
-    res.send("Shorten URL Route")
-})
+router.post("/shorten",createShortUrl)
+
 
 
 export default router
+import { createShortUrl } from "../controllers/urlController.js"

@@ -1,4 +1,5 @@
 import validUrl from "valid-url"
+import { nanoid } from "nanoid"
 const createShortUrl=async (req,res)=>{
     const {originalUrl}= req.body
     if (!validUrl.isWebUri(originalUrl)) {
@@ -7,4 +8,8 @@ const createShortUrl=async (req,res)=>{
     })
 }
 } 
+
+const shortCode=nanoid(6)
+console.log(shortCode)
+export {createShortUrl}
 
