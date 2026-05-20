@@ -31,5 +31,28 @@ const createShortUrl = async (req, res) => {
         shortUrl
     })
 }
+const getUrlStats = async (req,res) => {
+    const { shortCode } = req.params
+    
+        const url = await Url.findOne({
+            shortCode
+        })
+    
+        if (!url) {
+            return res.status(404).json({
+                message: "URL not Found"
+            })
+            
+        }
+        return res.status(200).json({
+                originalUrl: url.originalUrl,
+                shortUrl: url.shortUrl,
+                shortCode: url.shortCode,
+                clicks: url.clicks,
+                createdAt: url.createdAt
+        })    
+
+}
 
 export { createShortUrl }
+export {getUrlStats}

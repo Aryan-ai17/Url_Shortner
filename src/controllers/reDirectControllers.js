@@ -12,6 +12,8 @@ const redirectUrl = async (req, res) => {
             message: "URL not Found"
         })
     }
+    url.clicks += 1
+    await url.save()
 
     res.redirect(url.originalUrl)
 }

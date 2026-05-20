@@ -19,11 +19,11 @@ const urlSchema = new Schema({
     type:String,
     required:true
   },
-},
-  {
-    timestamps:true
+  createdAt:{
+    type:Date,
+    default:Date.now
   }
-
-);
+   
+});
 
 export default model("Url", urlSchema);
