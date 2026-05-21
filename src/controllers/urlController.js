@@ -6,6 +6,7 @@ import { nanoid } from "nanoid"
 import Url from "../models/Url.js"
 
 const createShortUrl = async (req, res) => {
+    try{
     const { originalUrl } = req.body
 
     if (!validUrl.isWebUri(originalUrl)) {
@@ -13,6 +14,15 @@ const createShortUrl = async (req, res) => {
             message: "Invalid URL"
         })
     }
+    const existingUrl = await Url.findOne({
+        originalUrl
+    })
+    if (existingUrl){
+        return res.status(200).json({
+            shortUrl:existingUrl.shortUrl
+        })
+    }
+
 
     const shortCode = nanoid(6)
 
@@ -31,7 +41,14 @@ const createShortUrl = async (req, res) => {
         shortUrl
     })
 }
+   catch(error){
+    return res.status(500).json({
+        message:"Server Error"
+    })
+}
+}
 const getUrlStats = async (req,res) => {
+    try{
     const { shortCode } = req.params
     
         const url = await Url.findOne({
@@ -50,8 +67,15 @@ const getUrlStats = async (req,res) => {
                 shortCode: url.shortCode,
                 clicks: url.clicks,
                 createdAt: url.createdAt
+        })
+    } catch (error) {
+        console.error(error)
+
+        return res.status(500).json({
+            message: "Server Error"
         })    
 
+}
 }
 
 export { createShortUrl }

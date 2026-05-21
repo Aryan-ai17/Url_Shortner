@@ -1,6 +1,7 @@
 import Url from "../models/Url.js"
 
 const redirectUrl = async (req, res) => {
+    try{
     const { shortCode } = req.params
 
     const url = await Url.findOne({
@@ -16,6 +17,14 @@ const redirectUrl = async (req, res) => {
     await url.save()
 
     res.redirect(url.originalUrl)
+} catch (error) {
+        console.error(error)
+
+        return res.status(500).json({
+            message: "Server Error"
+        })
 }
+}
+
 
 export { redirectUrl }
