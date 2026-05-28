@@ -39,7 +39,8 @@ const createShortUrl = async (req, res) => {
     const newUrl = new Url({
         originalUrl,
         shortCode,
-        shortUrl
+        shortUrl,
+        user: req.user.userId
     })
 
     await newUrl.save()
@@ -85,6 +86,24 @@ const getUrlStats = async (req,res) => {
 
 }
 }
-
+const getMyUrls= async (req,res) => {
+    try {
+        const userId=req.user.userId
+        const urls= await Url.find({
+            user:userId
+        })
+        return res.status(200).json({
+            urls
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            message: "Server Error"
+        })
+        
+    }
+    
+}
 export { createShortUrl }
 export {getUrlStats}
+export {getMyUrls}
