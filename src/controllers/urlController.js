@@ -63,6 +63,11 @@ const getUrlStats = async (req,res) => {
         const url = await Url.findOne({
             shortCode
         })
+        if (url.user.toString() !== req.user.userId){
+            return res.status(403).json({
+                message: "Access Forbidden"
+            })
+        }
     
         if (!url) {
             return res.status(404).json({
@@ -104,6 +109,38 @@ const getMyUrls= async (req,res) => {
     }
     
 }
+const deleteUrl = async (req,res) => {
+    try {
+        const { shortCode }= req.params
+
+        const url = await Url.findOne({
+            shortCode
+        })
+        if (!url){
+            return res.status(404).json({
+                message:"Url not Found"
+            })
+        }
+        if (url.user.toString() !== req.user.userId){
+            return res.status(403).json({
+                message: "Access Forbidden"
+            })
+        }
+        await Url.deleteOne({
+            shortCode
+        })
+        return res.status(200).json({
+            message: "Url Deleted Successfully"
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message:"Server Error"
+        })
+        
+    }
+    
+}
 export { createShortUrl }
 export {getUrlStats}
 export {getMyUrls}
+export {deleteUrl}
