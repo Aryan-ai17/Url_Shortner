@@ -1,5 +1,5 @@
 import express from "express"
-import { createShortUrl, deleteUrl, getMyUrls } from "../controllers/urlController.js"
+import { createShortUrl, deleteUrl, getMyUrls, updateUrl } from "../controllers/urlController.js"
 import { getUrlStats } from "../controllers/urlController.js"
 import authMiddleware from "../middleware/auth.middleware.js"
 const router =express.Router()
@@ -11,6 +11,7 @@ router.get(
     getMyUrls
 )
 router.delete("/:shortCode",authMiddleware,deleteUrl)
+router.patch("/:shortCode",authMiddleware,updateUrl)
 
 
 

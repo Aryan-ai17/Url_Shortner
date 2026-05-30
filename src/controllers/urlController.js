@@ -140,7 +140,46 @@ const deleteUrl = async (req,res) => {
     }
     
 }
+const updateUrl = async (req,res) => {
+    try {
+        const {shortCode}= req.params
+        const url= await Url.findOne({
+            shortCode
+        })
+        if (!url){
+            return res.status(404).json({
+                message:"Url not Found"
+            })
+        }
+        if (url.user.toString() !== req.user.userId){
+            return res.status(403).json({
+                message: "Access Forbidden"
+            })
+        }
+        const { originalUrl }=req.body
+        if (!originalUrl){
+            return res.status(400).json({
+                message: "Original Url is required"
+            })
+        }
+        url.originalUrl= originalUrl
+        await url.save()
+        return res.status(200).json({
+            message:"Url Updated Successfully" 
+            
+        })
+ 
+        
+    } catch (error) {
+        return res.status(500).json({
+            message:"Server Error"
+        })
+        
+    }
+    
+}
 export { createShortUrl }
 export {getUrlStats}
 export {getMyUrls}
 export {deleteUrl}
+export {updateUrl}
