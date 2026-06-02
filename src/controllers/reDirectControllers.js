@@ -1,4 +1,4 @@
-import Url from "../models/Url.js"
+import Url from "../models/url.js"
 
 const redirectUrl = async (req, res) => {
     try{

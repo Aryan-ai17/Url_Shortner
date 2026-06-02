@@ -3,7 +3,7 @@ dotenv.config()
 
 import validUrl from "valid-url"
 import { nanoid } from "nanoid"
-import Url from "../models/Url.js"
+import Url from "../models/url.js"
 import QRCode from "qrcode"
 
 const createShortUrl = async (req, res) => {
