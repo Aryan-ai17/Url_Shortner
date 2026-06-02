@@ -5,10 +5,11 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "start": "node index.js",
+  "dev": "nodemon index.js"
+},
+  
+  "author": "Aryan Yadav",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^3.0.3",
