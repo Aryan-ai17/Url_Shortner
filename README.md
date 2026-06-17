@@ -1,121 +1,214 @@
-# URL Shortener Backend
+# AI URL Shortener SaaS
 
-A production-ready URL Shortener backend built using **Node.js, Express.js, and MongoDB**. Users can shorten URLs, manage their own links, track analytics, and securely authenticate using JWT.
+A full-stack URL Shortener SaaS built with **React, Node.js, Express.js, and MongoDB**. Users can securely create, manage, and analyze shortened URLs through a modern dashboard. The application includes authentication, analytics, QR code generation, and is designed to be extended with AI-powered features.
 
-## Live API
+> **Project Status:** 🚧 Frontend currently under development.
 
-Deployed Backend: https://url-shortner-n8i7.onrender.com
+---
 
-## Features
+# Live Demo
 
-### URL Management
+## Backend API
 
-* Shorten long URLs
-* Redirect short URLs to original URLs
-* QR code generation for shortened URLs
-* Click analytics tracking
-* URL statistics API
-* Duplicate URL prevention
+https://url-shortner-n8i7.onrender.com
 
-### Authentication & Authorization
+## Frontend
+
+Coming Soon
+
+---
+
+# Features
+
+## Authentication
 
 * User Registration
 * User Login
 * JWT Authentication
-* Password hashing using bcrypt
-* Protected routes using middleware
-* Ownership-based access control (users can only manage their own URLs)
+* Password hashing with bcrypt
+* Protected Routes
+* User-specific URL management
 
-### CRUD Operations
+---
 
-* Create Short URL
-* Get User URLs
-* Update URL
-* Delete URL
+## URL Management
 
-### Security
+* Create Short URLs
+* Redirect Short URLs
+* Update URLs
+* Delete URLs
+* View all user URLs
+* Duplicate URL prevention
 
-* API rate limiting to prevent abuse and brute-force attacks
-* Error handling using try/catch
+---
 
-## Tech Stack
+## Analytics
+
+* Click Tracking
+* URL Statistics
+* QR Code Generation
+
+---
+
+## Security
+
+* JWT Authentication
+* Password Hashing
+* API Rate Limiting
+* Ownership-based Authorization
+* Error Handling
+
+---
+
+# Tech Stack
+
+## Frontend
+
+* React
+* React Router
+* Vite
+
+## Backend
 
 * Node.js
 * Express.js
 * MongoDB Atlas
 * Mongoose
-* JWT (jsonwebtoken)
+* JWT
 * bcrypt
 * NanoID
-* express-rate-limit
 * QRCode
-* Render (Deployment)
+* express-rate-limit
 
-## API Endpoints
+## Deployment
 
-### Authentication
+* Render
+* MongoDB Atlas
 
-#### Register User
+---
 
-POST `/api/auth/register`
+# Project Structure
 
-#### Login User
-
-POST `/api/auth/login`
-
-Request:
-
-```json
-{
-  "email": "test@example.com",
-  "password": "password123"
-}
+```text
+url-shortener/
+│
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
+├── src/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   └── utils/
+│
+├── index.js
+├── package.json
+└── README.md
 ```
 
 ---
 
-### URL APIs
+# API Endpoints
 
-#### Create Short URL
+## Authentication
 
-POST `/api/url/shorten`
+### Register
 
-#### Get My URLs
-
-GET `/api/url/my-urls`
-
-#### Get URL Stats
-
-GET `/api/url/stats/:shortCode`
-
-#### Update URL
-
-PATCH `/api/url/:shortCode`
-
-Request:
-
-```json
-{
-  "originalUrl": "https://google.com"
-}
+```
+POST /api/auth/register
 ```
 
-#### Delete URL
+### Login
 
-DELETE `/api/url/:shortCode`
+```
+POST /api/auth/login
+```
 
-#### Redirect URL
+---
 
-GET `/:shortCode`
+## URL APIs
 
-## Setup
+### Create Short URL
+
+```
+POST /api/url/shorten
+```
+
+### Get User URLs
+
+```
+GET /api/url/my-urls
+```
+
+### Get URL Statistics
+
+```
+GET /api/url/stats/:shortCode
+```
+
+### Update URL
+
+```
+PATCH /api/url/:shortCode
+```
+
+### Delete URL
+
+```
+DELETE /api/url/:shortCode
+```
+
+### Redirect
+
+```
+GET /:shortCode
+```
+
+---
+
+# Local Setup
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+Install backend dependencies:
 
 ```bash
 npm install
+```
+
+Install frontend dependencies:
+
+```bash
+cd frontend
+npm install
+```
+
+Run backend:
+
+```bash
 npm run dev
 ```
 
-Create a `.env` file:
+Run frontend:
+
+```bash
+cd frontend
+npm run dev
+```
+
+---
+
+# Environment Variables
+
+Create a `.env` file in the backend root:
 
 ```env
 MONGO_URI=your_mongodb_connection
@@ -123,9 +216,23 @@ JWT_SECRET=your_secret_key
 BASE_URL=http://localhost:3000
 ```
 
-## Future Improvements
+---
 
-* Forgot Password Feature
-* Swagger API Documentation
+# Roadmap
+
+* Frontend Dashboard
+* Authentication UI
+* Analytics Dashboard
 * Custom URL Alias
 * Link Expiration
+* AI Slug Suggestions
+* Forgot Password
+* API Documentation (Swagger)
+* Docker Support
+* Unit & Integration Tests
+
+---
+
+# License
+
+This project is created for learning, portfolio, and demonstration purposes.
