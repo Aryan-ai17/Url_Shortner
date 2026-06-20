@@ -1,18 +1,35 @@
+import { shortenUrl } from "../services/urlService";
+import { useState } from "react";
 import Button from "../components/Button";
+import Input from "../components/Input";
 
 function Home() {
-  function sayHello() {
-    alert("Button Clicked!");
+  const [url,setUrl]=useState("");
+  const [shortUrl,setShortUrl]=useState("");
+  async function handleShorten() {
+  try {
+    const data = await shortenUrl(url);
+
+    
+  } catch (error) {
+    console.error(error);
   }
+}
 
   return (
-    <div className="p-10 space-y-4">
-      <Button onClick={sayHello}>
-        Click Me
-      </Button>
+    <div className="max-w-md mx-auto mt-20 space-y-4">
+      <h1 className="text-3xl font-bold">
+        AI URL Shortener
+      </h1>
 
-      <Button disabled>
-        Disabled Button
+      <Input
+        placeholder="Paste your long URL..."
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+      />
+
+      <Button onClick={handleShorten}>
+        Shorten URL
       </Button>
     </div>
   );
