@@ -1,6 +1,8 @@
+
 import { useState } from "react";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { register } from "../services/authService";
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -9,6 +11,7 @@ function Signup() {
     password: "",
     confirmPassword: "",
   });
+
   function handleChange(e) {
     const { name, value } = e.target;
 
@@ -17,7 +20,27 @@ function Signup() {
       [name]: value,
     });
   }
-  console.log(formData)
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const data = await register(formData);
+      console.log("Success:", data);
+    } catch (error) {
+      console.log("Error:", error);
+
+      if (error.response) {
+        console.log("Status:", error.response.status);
+        console.log("Data:", error.response.data);
+      } else if (error.request) {
+        console.log("No response received");
+        console.log(error.request);
+      } else {
+        console.log("Error message:", error.message);
+      }
+    }
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -26,12 +49,13 @@ function Signup() {
           Create Account
         </h1>
 
-        <div className="space-y-4">
-          <Input placeholder="Full Name"
-           name="name"
-           value={formData.name}
-           onChange={handleChange}
-           />
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            name="name"
+            placeholder="Full Name"
+            value={formData.name}
+            onChange={handleChange}
+          />
 
           <Input
             type="email"
@@ -53,17 +77,18 @@ function Signup() {
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
-             value={formData.confirmPassword}
-             onChange={handleChange}
+            value={formData.confirmPassword}
+            onChange={handleChange}
           />
 
-          <Button>
+          <Button type="submit">
             Create Account
           </Button>
-        </div>
+        </form>
       </div>
     </div>
   );
 }
 
 export default Signup;
+
