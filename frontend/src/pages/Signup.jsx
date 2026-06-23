@@ -11,6 +11,7 @@ function Signup() {
     password: "",
     confirmPassword: "",
   });
+  const [error, setError]=useState("");
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -23,6 +24,20 @@ function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setError("");
+    if (
+  !formData.name ||
+  !formData.email ||
+  !formData.password ||
+  !formData.confirmPassword
+) {
+  setError("Please fill in all fields.");
+  return;
+}
+if (formData.password !== formData.confirmPassword) {
+  setError("Passwords do not match.");
+  return;
+}
 
     try {
       const data = await register(formData);
@@ -31,9 +46,10 @@ function Signup() {
       console.log("Error:", error);
 
       if (error.response) {
-        console.log("Status:", error.response.status);
-        console.log("Data:", error.response.data);
-      } else if (error.request) {
+
+         setError(error.response.data.message);
+      }
+       else if (error.request) {
         console.log("No response received");
         console.log(error.request);
       } else {
@@ -48,6 +64,11 @@ function Signup() {
         <h1 className="text-3xl font-bold text-center mb-6">
           Create Account
         </h1>
+        {error && (
+          <p className="text-red-500 text-sm text-center">
+          {error}
+           </p>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
