@@ -1,5 +1,5 @@
-
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { register } from "../services/authService";
@@ -12,6 +12,7 @@ function Signup() {
     confirmPassword: "",
   });
   const [error, setError]=useState("");
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -41,7 +42,8 @@ if (formData.password !== formData.confirmPassword) {
 
     try {
       const data = await register(formData);
-      console.log("Success:", data);
+      console.log(data);
+      navigate("/login");
     } catch (error) {
       console.log("Error:", error);
 

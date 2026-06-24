@@ -1,16 +1,16 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3000/api/auth";
-
 export async function register(userData) {
-  try {
-    const response = await axios.post(
-      `${API_URL}/register`,
-      userData
-    );
+  console.log("Sending:", userData);
 
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  const response = await axios({
+    method: "post",
+    url: "http://localhost:3000/api/auth/register",
+    data: userData,
+    timeout: 5000,
+  });
+
+  console.log("Response:", response);
+
+  return response.data;
 }
