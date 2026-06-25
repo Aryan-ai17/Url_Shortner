@@ -67,7 +67,7 @@ const loginUser = async (req,res) => {
         process.env.JWT_SECRET
     )
          return res.status(200).json({
-            message:"User logged in Succesfully",
+            message:"User logged in Successfully",
             token
         })
         
