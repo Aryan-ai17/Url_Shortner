@@ -20,3 +20,22 @@ export async function shortenUrl(originalUrl) {
     throw error;
   }
 }
+export async function getMyUrls() {
+  try {
+    const token = localStorage.getItem("token");
+
+    const response = await axios.get(
+      `${API_URL}/my-urls`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
